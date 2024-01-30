@@ -1477,4 +1477,12 @@ module Phlex::Rails::Helpers
 		# @!method word_wrap(...)
 		define_value_helper :word_wrap
 	end
+
+	def self.helpers
+		self.constants.map { |constant| self.const_get constant }
+	end
+
+	def self.included(component)
+		helpers.each { |helper| component.include helper }
+	end
 end
